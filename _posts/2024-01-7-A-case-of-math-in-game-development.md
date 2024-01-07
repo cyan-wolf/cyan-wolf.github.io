@@ -36,21 +36,21 @@ func fire_enemy_projectile(enemy, player):
 # Problem
 However this causes another problem, the magnitude of the vector that results from the calculation of B - A, is smaller when the enemy is closer to the player and bigger when it’s closer to the player. This behavior could be useful for some other use case, but right now, it’s better for the projectile’s speed to be the same regardless of the distance between the targets. Vector math comes to save us again, as there is an operation called normalization that can be applied to vectors.
 
-Figure 1: The direction vector when A (the player) is close to B (the enemy).
+**Figure 1**: The direction vector when A (the player) is close to B (the enemy).
 
 ![figure 1]({{ site.baseurl }}/images/blogs/post_01/figure_01.png)
 
-Figure 2: The direction vector when A (the player) is farther away from B (the enemy).
+**Figure 2**: The direction vector when A (the player) is farther away from B (the enemy).
 
 ![figure 2]({{ site.baseurl }}/images/blogs/post_01/figure_02.png)
 
 The normalization operation can be thought of as a function that takes any vector, and returns a new vector heading in the same direction, but with the magnitude set to 1. If the direction vector wasn’t normalized, if the player was farther away from the enemy, the projectile would move faster, viceversa if the player was closer. This would be confusing for people playing the game to say the least. 
 
-Figure 3: The normalized direction vector when A (the player) is close to B (the enemy).
+**Figure 3**: The normalized direction vector when A (the player) is close to B (the enemy).
 
 ![figure 3]({{ site.baseurl }}/images/blogs/post_01/figure_03.png)
 
-Figure 4: The normalized direction vector when A (the player) is farther away from B (the enemy).
+**Figure 4**: The normalized direction vector when A (the player) is farther away from B (the enemy).
 
 ![figure 4]({{ site.baseurl }}/images/blogs/post_01/figure_04.png)
 
@@ -78,11 +78,11 @@ The code we have now successfully computes the direction that the summoned proje
 # Scaling
 A vector can be multiplied by a number (scalar) using an operation called scaling. If we store our scalar in a variable, we should be able to multiply it with the direction vector to get a velocity vector. This way, one can use the normalized direction vector along with a desired scalar to compute the velocity of an enemy’s projectile. For example, if a vector is multiplied by a scalar with a value of 2.0, the resulting vector would have twice the original vector’s magnitude. 
 
-Figure 5: The normalized direction vector after the enemy fires a projectile.
+**Figure 5**: The normalized direction vector after the enemy fires a projectile.
 
 ![figure 5]({{ site.baseurl }}/images/blogs/post_01/figure_05.png)
 
-Figure 6: The velocity vector when A (the player) is close to B (the enemy). The scaling factor used in this figure is 1.5, hence, the magnitude (length) of the velocity is 1.5.
+**Figure 6**: The velocity vector when A (the player) is close to B (the enemy). The scaling factor used in this figure is 1.5, hence, the magnitude (length) of the velocity is 1.5.
 
 ![figure 6]({{ site.baseurl }}/images/blogs/post_01/figure_06.png)
 
