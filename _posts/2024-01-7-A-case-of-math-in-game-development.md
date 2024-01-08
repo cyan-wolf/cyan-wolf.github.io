@@ -14,27 +14,27 @@ One of the most striking examples of a mathematical topic useful in game develop
 My game’s gameplay is very focused on projectiles. Enemies, bosses, and the player can fire projectiles. Projectiles are the main mechanism the player uses to interact with the world.  When a projectile is being fired, be it from an enemy, a boss or the player, there are two main things that determine the movement of the projectile, the speed and the direction. The direction is the most important part since there are infinitely many directions that a projectile could be fired from. The speed is also important, since it can’t be too large (or else the projectiles will be impossible to avoid; meaning the game will be too difficult) and it can’t be too small (or else the game will be too easy). However, generally the speed is constant and doesn’t have to be computed.
 
 # Vectors
-Both of these problems can be addressed with vector operations. There are many special operations that can be performed on vectors, which could be addition, subtraction or some other special operation. If one needs to compute the direction that the projectile needs to travel to go from point A to B, one just needs to subtract the two vectors like so: B - A
+Both of these problems can be addressed with vector operations. There are many special operations that can be performed on vectors, which could be addition, subtraction or some other special operation. If one needs to compute the direction that the projectile needs to travel to go from point B to A, one just needs to subtract the two vectors like so: A - B.
 
-Note the order, B - A gives you the vector that goes from A to B, meanwhile A - B gives you the vector that goes from B to A (which goes in the opposite direction). 
+Note the order, A - B gives you the vector that goes from B to A, meanwhile B - A gives you the vector that goes from A to B (which goes in the opposite direction). 
 
-If A is a vector representing the position of an enemy and B is a vector representing the position of the player, we can compute the direction of a projectile fired by an enemy towards the player. See the following example code,
+If A is a vector representing the position of the player and B is a vector representing the position of an enemy, we can compute the direction of a projectile fired by an enemy towards the player. See the following example code,
 
 ```gdscript
 func fire_enemy_projectile(enemy, player):
-    var pos_a = enemy.position
-    var pos_b = player.position
+    var pos_a = player.position
+    var pos_b = enemy.position
 
 
-    var direction = pos_b - pos_a
+    var direction = pos_a - pos_b
 
 
-    # Summon the projectile at the enemy’s position (A), 
-    # heading in the calculated direction (B - A).
-    summon_projectile(pos_a, direction)
+    # Summon the projectile at the enemy’s position (B), 
+    # heading in the calculated direction (A - B).
+    summon_projectile(pos_b, direction)
 ```
 # Problem
-However this causes another problem, the magnitude of the vector that results from the calculation of B - A, is smaller when the enemy is closer to the player and bigger when it’s closer to the player. This behavior could be useful for some other use case, but right now, it’s better for the projectile’s speed to be the same regardless of the distance between the targets. Vector math comes to save us again, as there is an operation called normalization that can be applied to vectors.
+However this causes another problem, the magnitude of the vector that results from the calculation of A - B, is smaller when the enemy is closer to the player and bigger when it’s closer to the player. This behavior could be useful for some other use case, but right now, it’s better for the projectile’s speed to be the same regardless of the distance between the targets. Vector math comes to save us again, as there is an operation called normalization that can be applied to vectors.
 
 **Figure 1**: The direction vector when A (the player) is close to B (the enemy).
 
@@ -58,18 +58,18 @@ See the following example code,
 
 ```gdscript
 func fire_enemy_projectile(enemy, player):
-    var pos_a = enemy.position
-    var pos_b = player.position
+    var pos_a = player.position
+    var pos_b = enemy.position
 
 
     # Sets the calculated vector’s magnitude to 1, while 
     # the direction.
-    var direction = normalize(pos_b - pos_a)
+    var direction = normalize(pos_a - pos_b)
 
 
-    # Summon the projectile at the enemy’s position (A), 
-    # heading in the calculated direction (B - A).
-    summon_projectile(pos_a, direction)
+    # Summon the projectile at the enemy’s position (B), 
+    # heading in the calculated direction (A - B).
+    summon_projectile(pos_b, direction)
 ```
 
 # What about the speed?
@@ -90,8 +90,8 @@ Armed with this insight, we can write our final code
 
 ```gdscript
 func fire_enemy_projectile(enemy, player):
-    var pos_a = enemy.position
-    var pos_b = player.position
+    var pos_a = player.position
+    var pos_b = enemy.position
 
 
     var speed = 5.0
@@ -99,14 +99,14 @@ func fire_enemy_projectile(enemy, player):
 
     # Sets the calculated vector’s magnitude to 1, while 
     # the direction.
-    var direction = normalize(pos_b - pos_a)
+    var direction = normalize(pos_a - pos_b)
     
     # Computes the velocity vector.
     var velocity = direction * speed
 
 
-    # Summon the projectile at the enemy’s position (A), 
-    # heading in the calculated direction (B - A).
+    # Summon the projectile at the enemy’s position (B), 
+    # heading in the calculated direction (A - B).
     summon_projectile(pos_a, velocity)
 ```
 
