@@ -44,7 +44,7 @@ However this causes another problem, the magnitude of the vector that results fr
 
 ![figure 2]({{ site.baseurl }}/images/blogs/post_01/figure_02.png)
 
-The normalization operation can be thought of as a function that takes any vector, and returns a new vector heading in the same direction, but with the magnitude set to 1. If the direction vector wasn’t normalized, if the player was farther away from the enemy, the projectile would move faster, viceversa if the player was closer. This would be confusing for people playing the game to say the least. 
+The normalization operation can be thought of as a function that takes any vector, and returns a new vector heading in the same direction, but with the magnitude set to 1. If the direction vector wasn’t normalized, if the player was farther away from the enemy, the projectile would move faster, and slower if the player was closer. This would be confusing for people playing the game to say the least. 
 
 **Figure 3**: The normalized direction vector when A (the player) is close to B (the enemy).
 
