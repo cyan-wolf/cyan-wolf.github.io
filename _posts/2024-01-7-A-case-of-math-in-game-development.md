@@ -61,11 +61,9 @@ func fire_enemy_projectile(enemy, player):
     var pos_a = player.position
     var pos_b = enemy.position
 
-
     # Sets the calculated vector’s magnitude to 1, while 
-    # the direction.
+    # the direction stays the same.
     var direction = normalize(pos_a - pos_b)
-
 
     # Summon the projectile at the enemy’s position (B), 
     # heading in the calculated direction (A - B).
@@ -93,17 +91,15 @@ func fire_enemy_projectile(enemy, player):
     var pos_a = player.position
     var pos_b = enemy.position
 
-
+    # The scaling factor could be any value, even 0.0.
     var speed = 5.0
 
-
     # Sets the calculated vector’s magnitude to 1, while 
-    # the direction.
+    # the direction stays the same.
     var direction = normalize(pos_a - pos_b)
     
     # Computes the velocity vector.
     var velocity = direction * speed
-
 
     # Summon the projectile at the enemy’s position (B), 
     # heading in the calculated direction (A - B).
