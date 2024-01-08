@@ -34,7 +34,7 @@ func fire_enemy_projectile(enemy, player):
     summon_projectile(pos_b, direction)
 ```
 # Problem
-However this causes another problem, the magnitude of the vector that results from the calculation of A - B, is smaller when the enemy is closer to the player and bigger when it’s closer to the player. This behavior could be useful for some other use case, but right now, it’s better for the projectile’s speed to be the same regardless of the distance between the targets. Vector math comes to save us again, as there is an operation called normalization that can be applied to vectors.
+However this causes another problem, the magnitude of the vector that results from the calculation of A - B, is bigger when it’s farther way from the player and smaller when the enemy is closer to the player. This behavior could be useful for some other use case, but right now, it’s better for the projectile’s speed to be the same regardless of the distance between the targets. Vector math comes to save us again, as there is an operation called normalization that can be applied to vectors.
 
 **Figure 1**: The direction vector when A (the player) is farther away from B (the enemy).
 
